@@ -28,7 +28,7 @@
   <div class="info">Apontar câmera para o marcador inicial</div>
   
   <a-scene 
-    arjs="debugUIEnabled: false; trackingBackend: artoolkit;"
+    arjs="debugUIEnabled: false; trackingBackend: arjs;"
     vr-mode-ui="enabled: true"
   >
     <!-- Marcador Inicial -->
@@ -55,10 +55,10 @@
   </a-scene>
 
   <script>
-    // Detecção do Marcador Inicial (corrigido)
+    // Detecção do Marcador Inicial
     document.getElementById('startMarker').addEventListener('markerFound', function() {
       const line = document.getElementById('line');
-      line.setAttribute('visible', 'true'); // Corrigido "setattribute" para "setAttribute"
+      line.setAttribute('visible', 'true');
       console.log('MARCADOR INICIAL DETECTADO!');
     });
   </script>
