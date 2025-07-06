@@ -1,4 +1,76 @@
-teste inicio
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Experiência AR/VR - MVP</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- A-Frame e AR.js -->
+    <script src="https://aframe.io/releases/1.7.0/aframe.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@ar-js-org/ar.js@3.4.0/aframe/build/aframe-ar.min.js"></script>
+    <style>
+      body { margin: 0; overflow: hidden; }
+      .info {
+        position: fixed;
+        top: 10px;
+        left: 10px;
+        background: rgba(0,0,0,0.5);
+        color: white;
+        padding: 10px;
+        font-family: Arial;
+        z-index: 999;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="info">Apontar câmera para o marcador inicial (start-marker.patt)</div>
+    
+    <a-scene arjs="debugUIEnabled: false;">
+      <!-- Marcador Inicial (Start) -->
+      <a-marker 
+        id="startMarker" 
+        type="pattern" 
+        url="assets/markers/start-marker.patt" 
+        markerhandler
+      >
+        <!-- Texto para debug -->
+        <a-text value="Marcador Inicial Detectado!" position="0 0.5 0" color="#00FF00" align="center"></a-text>
+      </a-marker>
 
-heyheyhey    
-erve3rve3rve3r
+      <!-- Marcador Final (End) - Pré-configurado para Fase 3 -->
+      <a-marker 
+        id="endMarker" 
+        type="pattern" 
+        url="assets/markers/end-marker.patt" 
+        markerhandler
+      >
+        <a-text value="Marcador Final" position="0 0.5 0" color="#FF0000" align="center"></a-text>
+      </a-marker>
+
+      <!-- Linha Física (visível apenas quando o marcador inicial é detectado) -->
+      <a-entity 
+        id="line" 
+        visible="false" 
+        position="0 0 -1" 
+        geometry="primitive: box; width: 2; height: 0.05; depth: 0.05" 
+        material="color: #00FFFF"
+      ></a-entity>
+
+      <!-- Câmera AR -->
+      <a-entity camera look-controls></a-entity>
+    </a-scene>
+
+    <script>
+      // Evento: Marcador Inicial Detectado
+      document.getElementById('startMarker').addEventListener('markerFound', function() {
+        const line = document.getElementById('line');
+        line.setAttribute('visible', 'true'); // Mostra a linha
+        console.log('Marcador inicial detectado! Linha visível.');
+      });
+
+      // Evento: Marcador Final Detectado (para Fase 3)
+      document.getElementById('endMarker').addEventListener('markerFound', function() {
+        window.location.href = 'content.html'; // Redireciona para a página de vídeo
+      });
+    </script>
+  </body>
+</html>
