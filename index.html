@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <!-- Favicon -->
   <link rel="icon" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'><text x='0' y='12' font-size='12'>AR</text></svg>">
-  <!-- A-Frame 1.3.0 (sem THREE.js extra) -->
+  <!-- A-Frame 1.3.0 -->
   <script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
   <!-- AR.js 3.4.0 -->
   <script src="https://cdn.jsdelivr.net/npm/ar.js@3.4.0/aframe/build/aframe-ar.min.js"></script>
@@ -55,10 +55,10 @@
   </a-scene>
 
   <script>
-    // Detecção do Marcador Inicial
+    // Detecção do Marcador Inicial (corrigido)
     document.getElementById('startMarker').addEventListener('markerFound', function() {
       const line = document.getElementById('line');
-      line.setattribute('visible', 'true');
+      line.setAttribute('visible', 'true'); // Corrigido "setattribute" para "setAttribute"
       console.log('MARCADOR INICIAL DETECTADO!');
     });
   </script>
