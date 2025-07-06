@@ -4,6 +4,8 @@
   <meta charset="utf-8">
   <title>Experiência Híbrida AR/VR - MVP</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Favicon básico para evitar o erro 404 -->
+  <link rel="icon" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'><text x='0' y='12' font-size='12'>AR</text></svg>">
   <!-- A-Frame e AR.js -->
   <script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/ar.js@3.4.0/aframe/build/aframe-ar.min.js"></script>
@@ -64,6 +66,7 @@
       const line = document.getElementById('line');
       line.setAttribute('visible', 'true');
       console.log('MARCADOR INICIAL DETECTADO!');
+      console.log('THREE Version:', THREE.REVISION); // Verifica a versão do THREE
     });
 
     // Detecção do Marcador Final (para Fase 3)
