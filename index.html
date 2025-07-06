@@ -1,55 +1,75 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <title>Teste de Detecção AR - MVP</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://aframe.io/releases/1.7.0/aframe.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@ar-js-org/ar.js@3.4.0/aframe/build/aframe-ar.min.js"></script>
-    <style>
-      body { margin: 0; overflow: hidden; }
-      .info {
-        position: fixed;
-        top: 10px;
-        left: 10px;
-        background: rgba(0,0,0,0.5);
-        color: white;
-        padding: 10px;
-        font-family: Arial;
-        z-index: 999;
-      }
-    </style>
-  </head>
-  <body>
-    <div class="info">Apontar câmera para o marcador inicial</div>
-    
-    <a-scene arjs="debugUIEnabled: false;">
-      <!-- Marcador Inicial -->
-      <a-marker 
-        id="startMarker" 
-        type="pattern" 
-        url="assets/markers/start-marker.patt" 
-        markerhandler
-      >
-        <!-- Texto para feedback visual -->
-        <a-text value="Detectando..." position="0 0.5 0" color="#FFFFFF" align="center"></a-text>
-      </a-marker>
+<head>
+  <meta charset="utf-8">
+  <title>Experiência Híbrida AR/VR - MVP</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- A-Frame e AR.js -->
+  <script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/ar.js@3.4.0/aframe/build/aframe-ar.min.js"></script>
+  <style>
+    body { margin: 0; overflow: hidden; }
+    .info {
+      position: fixed;
+      top: 10px;
+      left: 10px;
+      background: rgba(0,0,0,0.5);
+      color: white;
+      padding: 10px;
+      font-family: Arial;
+      z-index: 999;
+    }
+  </style>
+</head>
+<body>
+  <div class="info">Apontar câmera para o marcador inicial</div>
+  
+  <a-scene arjs="debugUIEnabled: false;">
+    <!-- Marcador Inicial -->
+    <a-marker 
+      id="startMarker" 
+      type="pattern" 
+      url="assets/markers/start-marker.patt" 
+      markerhandler
+    >
+      <a-text value="Detectando..." position="0 0.5 0" color="#FFFFFF" align="center"></a-text>
+    </a-marker>
 
-      <!-- Câmera AR -->
-      <a-entity camera look-controls></a-entity>
-    </a-scene>
+    <!-- Marcador Final (para Fase 3) -->
+    <a-marker 
+      id="endMarker" 
+      type="pattern" 
+      url="assets/markers/end-marker.patt" 
+      markerhandler
+    >
+      <a-text value="Marcador Final" position="0 0.5 0" color="#FF0000" align="center"></a-text>
+    </a-marker>
 
-    <script>
-      // Evento: Marcador Detectado
-      document.getElementById('startMarker').addEventListener('markerFound', function() {
-        console.log('MARCADOR DETECTADO: start-marker.patt');
-        // Muda o texto na tela para confirmar visualmente
-        const textEntity = document.querySelector('a-text');
-        textEntity.setAttribute('value', 'MARCADOR DETECTADO!');
-        textEntity.setAttribute('color', '#00FF00');
-      });
-    </script>
-  </body>
-</html>
-</html>
+    <!-- Linha Física -->
+    <a-entity 
+      id="line" 
+      visible="false" 
+      position="0 0 -1" 
+      geometry="primitive: box; width: 2; height: 0.05; depth: 0.05" 
+      material="color: #00FFFF"
+    ></a-entity>
+
+    <!-- Câmera AR -->
+    <a-entity camera look-controls></a-entity>
+  </a-scene>
+
+  <script>
+    // Detecção do Marcador Inicial
+    document.getElementById('startMarker').addEventListener('markerFound', function() {
+      const line = document.getElementById('line');
+      line.setAttribute('visible', 'true');
+      console.log('MARCADOR INICIAL DETECTADO!');
+    });
+
+    // Detecção do Marcador Final (para Fase 3)
+    document.getElementById('endMarker').addEventListener('markerFound', function() {
+      window.location.href = 'content.html';
+    });
+  </script>
+</body>
 </html>
