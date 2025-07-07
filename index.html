@@ -6,11 +6,10 @@
     <script src="https://cdn.jsdelivr.net/gh/aframevr/aframe@1.3.0/dist/aframe-master.min.js"></script>
     <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
 
-    <link rel="stylesheet" href="./css/aframe.css">
-    <link rel="stylesheet" href="./css/rstats.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/rStats/0.0.8/rStats.min.css">
 
     <style>
-        /* Estilos para o carregador (loader) do AR.js (mantidos inline por simplicidade ou se não for para um arquivo separado) */
+        /* Estilos para o carregador (loader) do AR.js (mantidos inline ou você pode movê-los para seu próprio arquivo CSS local, como 'custom.css') */
         .arjs-loader {
             height: 100%;
             width: 100%;
@@ -40,7 +39,7 @@
         vr-mode-ui="enabled: false;"
         renderer="logarithmicDepthBuffer: true; precision: medium;"
         embedded=""
-        arjs="trackingMethod: best; sourceType: webcam; debugUIEnabled: false;"
+        arjs="trackingMethod: best; sourceType: webcam; debugUIEnabled: true;"
         inspector=""
         keyboard-shortcuts=""
         screenshot=""
